@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.grid-container{
+  display: grid;
+  grid-template-columns: repeat(50,1fr) ;
+}
