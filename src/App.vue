@@ -1,6 +1,11 @@
 <template>
 <div class="flex flex-col items-center h-screen bg-gray-800">
-<h1 class="text-xl font-semibold text-gray-200 p-10">Pathfinder using Breath first search</h1>
+  <div>
+      <h1 class="text-xl font-semibold text-gray-200 p-10">Pathfinder using Breath first search</h1>
+      <li :class="`text-md text-white ${$store.state.startNode && ' line-through text-gray-500'}` ">Pick a starting point</li>
+      <li :class="`text-md text-white ${$store.state.endNode   && ' line-through text-gray-500'}` ">Pick a ending point </li>
+      <li :class="`text-md text-white ${$store.state.obstacles && ' line-through text-gray-500' }` ">Hold right-click and drag mouse to create obstacles</li>
+  </div>
   <div class="flex items-center">
     <button
       v-on:click="resetBoard"
@@ -21,6 +26,9 @@ export default {
   data() {
     return {
       componentKey: 0,
+      startSelected:this.$store.getters.getStartNode,
+      endSelected:this.$store.getters.getEndNode,
+      obstacleSelected:this.$store.getters.getObstacles,
     };
   },
   components: {
@@ -29,6 +37,9 @@ export default {
   methods: {
     resetBoard() {
       this.componentKey += 1;
+       this.$store.commit("setStartNode", false);
+       this.$store.commit("setEndNode", false);
+       this.$store.commit("setObstacles", false);
     },
   },
 };

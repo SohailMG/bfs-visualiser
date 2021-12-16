@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+    @layer components{
+        .box{
+
+            @apply border bg-white border-gray-100 w-4 h-4 text-xs cursor-pointer hover:scale-75 transition transform ease-in-out
+        }
+    }
+
 .grid-container{
   display: grid;
   grid-template-columns: repeat(50,1fr) ;

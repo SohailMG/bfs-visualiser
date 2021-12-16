@@ -1,5 +1,6 @@
 <template>
   <div class="flex items-center">
+
     <div class="flex flex-col items-center space-y-4">
       <button
         v-on:click="BSF"
@@ -11,7 +12,7 @@
         :disabled="!reachedEnd"
         v-on:click="showPath"
         :class="`${
-          reachedEnd ? 'bg-yellow-400' : 'bg-gray-200 cursor-not-allowed '
+          reachedEnd ? 'bg-yellow-400 ' : 'bg-gray-200 cursor-not-allowed '
         }text-white rounded-md shadow-md p-2 px-4`"
       >
         Path
@@ -21,7 +22,9 @@
       <div
         v-for="coord in coordinates"
         key="coord"
-        :class="`border bg-white border-gray-100 w-4 h-4 text-xs 
+        :class="`box ${!startNode && 'hover:bg-green-500'} ${
+          !endNode && 'hover:bg-red-500'
+        } ${(startNode && endNode) && 'hover:bg-gray-800'}
       ${coord == startNode && 'bg-green-500'}
       ${coord == endNode && 'bg-red-500'}`"
         :id="coord"
@@ -62,8 +65,10 @@ export default {
     selectNodes(coord) {
       if (!this.startNode) {
         this.startNode = coord;
+        this.$store.commit("setStartNode", true);
       } else if (!this.endNode) {
         this.endNode = coord;
+        this.$store.commit("setEndNode", true);
       } else {
         const sRow = Number(this.startNode.split("-")[0]);
         const sCol = Number(this.startNode.split("-")[1]);
@@ -86,6 +91,7 @@ export default {
         const r = Number(e.target.id.split("-")[0]);
         const c = Number(e.target.id.split("-")[1]);
         this.adjMatrix[r][c] = "#";
+        this.$store.commit("setObstacles", true);
       }
     },
     BSF() {
@@ -131,13 +137,10 @@ export default {
         this.colQueue.push(cc);
         this.visited[rr][cc] = true;
         if (rr + "-" + cc !== this.endNode) {
-          document.getElementById(`${rr}-${cc}`).classList.add("scale-150");
           setTimeout(() => {
             document.getElementById(`${rr}-${cc}`).style.backgroundColor =
               "#fabbfa";
-            document
-              .getElementById(`${rr}-${cc}`)
-              .classList.remove("scale-150");
+            
           }, 1);
         }
         this.nodesNextInLayer += 1;
