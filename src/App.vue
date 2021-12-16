@@ -1,10 +1,13 @@
 <template>
 <div class="flex flex-col items-center h-screen bg-gray-800">
   <div>
-      <h1 class="text-xl font-semibold text-gray-200 p-10">Pathfinder using Breath first search</h1>
-      <li :class="`text-md text-white ${$store.state.startNode && ' line-through text-gray-500'}` ">Pick a starting point</li>
-      <li :class="`text-md text-white ${$store.state.endNode   && ' line-through text-gray-500'}` ">Pick a ending point </li>
-      <li :class="`text-md text-white ${$store.state.obstacles && ' line-through text-gray-500' }` ">Hold right-click and drag mouse to create obstacles</li>
+      <h1 class="text-xl font-semibold text-yellow-500 p-10">Pathfinder using Breath first search</h1>
+      <ol class="list-decimal">
+
+      <li :class="`text-gray-100 ${$store.state.startNode && ' line-through text-gray-500'}` ">Pick a starting point</li>
+      <li :class="`text-gray-100 ${$store.state.endNode   && ' line-through text-gray-500'}` ">Pick a ending point </li>
+      <li :class="`text-gray-100 ${$store.state.obstacles && ' line-through text-gray-500' }` ">Hold right-click and drag mouse to create obstacles</li>
+      </ol>
   </div>
   <div class="flex items-center">
     <button
