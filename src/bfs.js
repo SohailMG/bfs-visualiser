@@ -8,7 +8,7 @@ let move_count = 0;
 let nodes_left_in_layer = 1;
 let nodes_in_next_layer = 0;
 let visited = Array.from(Array(rows), () => new Array(cols));
-let rowsDirectionsVec = [-1, +1, 0, 0];
+let rowsDirectionsVec = [-1, +1, 0, 0]
 let colsDirectionsVec = [0, 0, +1, -1];
 let rowQueue = [];
 let colQueue = [];
@@ -57,7 +57,7 @@ function BSF(maze) {
 function exploreNeighbors(r, c, maze) {
   for (let i = 0; i < 4; i++) {
     let rr = r + rowsDirectionsVec[i];
-    let cc = c + colsDirectionsVec[i];
+    let cc = c + colsDirectionsVec[i];  
 
     if (!isValidNeighbor(rr, cc, maze)) continue;
 
@@ -87,4 +87,5 @@ function findPath() {
   let maze = createMaze();
   const moves = BSF(maze);
   console.log(maze, moves);
+
 }
